@@ -59,10 +59,12 @@ app.post('/upload',upload.single('file'),(req,res)=>{
 });
 
 
+
 app.get('/files',(req,res)=>{
+    
     gfs.files.find().toArray((err,files)=>{
         if(!files || files.length==0){
-            res.status(404).json({err:'No files exists'});
+          return  res.status(404).json({err:'No files exist'});
         }
         return res.json(files);
     });
@@ -72,7 +74,7 @@ app.get('/files',(req,res)=>{
 app.get('/files/:filename',(req,res)=>{
     gfs.files.findOne({filename:req.params.filename}, (err,file)=>{
         if(!file || file.length==0){
-            res.status(404).json({err:'No files exists'});
+         return   res.status(404).json({err:'No file exists'});
         }
         return res.json(file);
     });
