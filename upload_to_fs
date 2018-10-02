@@ -1,0 +1,15 @@
+const uploadfile = multer.diskStorage({
+    destination: (req, file, cb)=> {
+      cb(null, 'uploaded')
+    },
+    filename: (req, file, cb)=> {
+      cb(null, file.originalname);
+    }
+  })
+
+const upload = multer({storage:uploadfile});
+
+
+app.post('/fileupload',upload.single('file'),(req,res,nex)=>{
+    return res.send('uploaded successfully');
+});
